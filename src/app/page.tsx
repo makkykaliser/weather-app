@@ -12,7 +12,7 @@ export default function Home() {
   const [lat, setLat] = React.useState(DEFAULT_LAT.toFixed(6))
   const [long, setLong] = React.useState(DEFAULT_LONG.toFixed(6))
 
-  let test = []
+  let sevenDayForecast = []
   const onLocateMe = () => {
     if (navigator.geolocation) {
       console.debug('k')
@@ -52,14 +52,14 @@ export default function Home() {
     fetch(url, {method: 'GET'})   
     .then((response) => response.json())
     .then((json) => {
-      test = json.properties.periods.map((period) => (
+      sevenDayForecast = json.properties.periods.map((period) => (
         { name: period.name, 
           shortForecast: period.shortForecast, 
           temperature: period.temperature
         }))
-      setWeather(test[0].shortForecast ?? '')
-      setTemp(test[0].temperature.toString() ?? '')
-      setForecast(test)
+      setWeather(sevenDayForecast[0].shortForecast ?? '')
+      setTemp(sevenDayForecast[0].temperature.toString() ?? '')
+      setForecast(sevenDayForecast)
     })
   }
   
